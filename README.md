@@ -1,64 +1,93 @@
 <div align="center">
 
-# Kaggle用Google Cloud Terraformファイル
+# 🌟 Kaggle用Google Cloud Terraformファイル
 
-</div>
-
-<div align="center">
-
-[![Terraform](https://img.shields.io/badge/Terraform-v1.0+-blue.svg)](https://www.terraform.io/)
-[![Google Cloud](https://img.shields.io/badge/Google%20Cloud-brightgreen.svg)](https://cloud.google.com/)
-[![GitHub](https://img.shields.io/badge/GitHub-Repository-orange)](https://github.com/your-username/your-repo)
+<img src="https://img.shields.io/badge/Terraform-v1.0+-blue.svg" alt="Terraform"/>
+<img src="https://img.shields.io/badge/Google%20Cloud-brightgreen.svg" alt="Google Cloud"/>
+<img src="https://img.shields.io/badge/GitHub-Repository-orange" alt="GitHub"/>
 
 </div>
 
 ## 📚 概要
-このリポジトリには、KaggleノートブックからGoogle Cloud SDKを使用するためのTerraformファイルが含まれています。
+このリポジトリは、KaggleノートブックからGoogle Cloud SDKを効率的に利用するための環境を、Terraformを使用して自動構築するためのコードを提供します。
 
 ## 🗂️ ファイル構成
-- [main.tf](main.tf): Google Cloudリソースを定義するTerraformファイル
-- [variables.tf](variables.tf): 変数定義ファイル
-- [LEARNING.md](LEARNING.md): Terraform学習ガイド
+```
+├── bucket.tf           # Cloud Storageバケットの定義
+├── iam.tf             # IAMロールの設定
+├── project.tf         # GCPプロジェクトの参照
+├── providers.tf       # Terraformプロバイダーの設定
+├── service_account.tf # サービスアカウントの定義
+├── variables.tf       # 変数定義
+└── terraform.tfvars   # 環境固有の設定値
+```
 
-## 🚀 使い方
-1.  Google Cloud SDKをインストールし、初期設定を行います。
-2.  必要なAPIを有効化します。
-3.  このリポジトリをクローンします。
-4.  `terraform.tfvars`ファイルを作成し、変数を設定します。
-    ```
-    project_name      = "your-project-name"
-    project_id        = "your-project-id"
-    org_id            = "your-org-id" # 組織を使用していない場合は不要
-    billing_account   = "your-billing-account"
-    region            = "your-region"
-    service_account_id = "your-service-account-id"
-    bucket_name       = "your-bucket-name"
-    ```
-5.  Terraformの初期化、計画、適用を実行します。
-    ```bash
-    terraform init
-    terraform plan
-    terraform apply
-    ```
+## 🚀 セットアップ手順
 
-## ☁️ Google Cloud Platform (GCP) について
--   Google Cloud Platform (GCP) は、Googleが提供するクラウドコンピューティングサービスです。
--   GCPを使用することで、KaggleノートブックからGoogle Cloudのリソースにアクセスし、データの転送や分析を行うことができます。
--   GCPの利用には、Googleアカウントと課金アカウントが必要です。
+### 前提条件
+- Google Cloud SDKのインストール
+- Terraformのインストール（v1.0以上）
+- 有効なGoogleアカウントと課金の設定
 
-### 🔑 GCPのサービスアカウントとロール
-GCPでは、サービスアカウントを使用して、アプリケーションやVMインスタンスなどのリソースに権限を付与します。
-サービスアカウントには、ロールを付与することで、特定のリソースへのアクセスを許可することができます。
-このTerraformファイルでは、以下のロールをサービスアカウントに付与しています。
--   Storage管理者 (`roles/storage.admin`)
--   Storage オブジェクト閲覧者 (`roles/storage.objectViewer`)
--   Storage オブジェクト作成者 (`roles/storage.objectCreator`)
+### 1️⃣ 初期設定
+1. Google Cloud SDKにログイン
+```bash
+gcloud auth login
+```
 
-## ⚠️ 注意点
--   `project_id`は一意である必要があります。
--   `billing_account`は有効な課金アカウントである必要があります。
--   必要な権限が付与されていることを確認してください。
+2. リポジトリのクローン
+```bash
+git clone https://github.com/your-username/kaggle-gcp-setup.git
+cd kaggle-gcp-setup
+```
 
-## 🐛 トラブルシューティング
--   権限エラーが発生した場合は、サービスアカウントに適切なロールが付与されているか確認してください。
--   APIエラーが発生した場合は、必要なAPIが有効化されているか確認してください。
+3. 環境変数の設定
+```bash
+cp terraform.tfvars.example terraform.tfvars
+# terraform.tfvarsを編集して必要な値を設定
+```
+
+### 2️⃣ Terraformの実行
+1. 初期化
+```bash
+terraform init
+```
+
+2. 実行計画の確認
+```bash
+terraform plan
+```
+
+3. リソースの作成
+```bash
+terraform apply
+```
+
+## ⚡ 主な機能
+- GCPプロジェクトの設定
+- サービスアカウントの作成と権限設定
+- Cloud Storageバケットの作成
+- 必要なIAMロールの設定
+
+## 🔒 セキュリティ設定
+- ユニフォームバケットレベルアクセス有効
+- 最小権限の原則に基づくIAMロール設定
+- サービスアカウントによる認証
+
+## ⚠️ 注意事項
+- プロジェクトIDは全体で一意である必要があります
+- 課金アカウントが有効であることを確認してください
+- 必要なAPIが有効化されていることを確認してください
+
+## 🔧 トラブルシューティング
+- **権限エラー**: サービスアカウントの権限を確認
+- **API制限**: 必要なAPIの有効化状態を確認
+- **バケット名の重複**: グローバルで一意な名前に変更
+
+## 📖 参考リンク
+- [Terraform公式ドキュメント](https://www.terraform.io/docs)
+- [Google Cloud公式ドキュメント](https://cloud.google.com/docs)
+- [Kaggleドキュメント](https://www.kaggle.com/docs)
+
+## 📝 ライセンス
+このプロジェクトはMITライセンスの下で公開されています。
