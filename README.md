@@ -1,5 +1,7 @@
 <div align="center">
 
+![Image](https://github.com/user-attachments/assets/be4f446f-0754-4764-a97c-1aac63022dc0)
+
 # 🌟 Kaggle用Google Cloud Terraformファイル
 
 <img src="https://img.shields.io/badge/Terraform-v1.0+-blue.svg" alt="Terraform"/>
