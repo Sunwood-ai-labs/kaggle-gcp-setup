@@ -1,0 +1,12 @@
+# プロジェクト設定
+project_name      = "example-project"
+project_id        = "example-project-id"
+org_id            = "000000000000"  # オプション
+billing_account   = "XXXXXX-XXXXXX-XXXXXX"
+
+# リージョン設定
+region            = "us-central1"  # デフォルト値
+
+# サービスアカウントとバケット設定
+service_account_id = "example-sa"
+bucket_name       = "example-bucket"

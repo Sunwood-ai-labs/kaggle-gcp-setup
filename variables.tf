@@ -17,6 +17,7 @@ variable "org_id" {
 variable "billing_account" {
   type        = string
   description = "Google Cloud課金アカウント"
+  default     = ""  # CLIでログイン済みの場合は自動的に関連付けられる
 }
 
 variable "region" {
